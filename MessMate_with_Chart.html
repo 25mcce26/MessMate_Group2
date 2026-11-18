@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MessMate — Less Waste. Better Meals.</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal:    #0D3B38;
+    --teal-mid:#155A55;
+    --lime:    #BBEF4A;
+    --lime-dim:#9FD13A;
+    --white:   #F7F9F4;
+    --grey:    #E6EAE3;
+    --ink:     #0D1A17;
+    --muted:   #5A7066;
+    --gap: 2.5rem;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 5vw;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    color: var(--lime);
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--white); font-weight: 400; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(247,249,244,0.75);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--lime); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--teal);
+    padding: 5rem 5vw 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-text h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    color: var(--white);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.2rem;
+  }
+  .hero-text h1 em {
+    font-style: normal;
+    color: var(--lime);
+  }
+  .hero-text p {
+    color: rgba(247,249,244,0.75);
+    font-size: 1.05rem;
+    max-width: 46ch;
+    margin-bottom: 2rem;
+  }
+  .pill-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .pill {
+    background: rgba(187,239,74,0.12);
+    border: 1px solid rgba(187,239,74,0.3);
+    color: var(--lime);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    letter-spacing: 0.01em;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--lime);
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .cta-btn:hover { background: var(--lime-dim); transform: translateY(-1px); }
+
+  /* QR block in hero */
+  .hero-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .qr-frame {
+    background: var(--white);
+    padding: 1.25rem;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    border: 2px solid var(--lime);
+  }
+  .qr-frame svg, .qr-frame img { display: block; width: 180px; height: 180px; }
+  .qr-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+  .qr-caption {
+    color: rgba(247,249,244,0.6);
+    font-size: 0.82rem;
+    text-align: center;
+    max-width: 22ch;
+  }
+
+  /* ── STAT STRIP ── */
+  .stat-strip {
+    background: var(--lime);
+    display: flex;
+    justify-content: space-around;
+    padding: 1.5rem 5vw;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ink);
+    display: block;
+    line-height: 1;
+  }
+  .stat-desc {
+    font-size: 0.8rem;
+    color: #2a4030;
+    font-weight: 500;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 4.5rem 5vw; }
+  section + section { border-top: 1px solid var(--grey); }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: var(--ink);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 32ch;
+    margin-bottom: 1rem;
+  }
+  .lead {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 54ch;
+    margin-bottom: var(--gap);
+  }
+
+  /* ── PROBLEM ── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .problem-card {
+    border-left: 3px solid var(--teal-mid);
+    padding: 1.2rem 1.2rem 1.2rem 1.4rem;
+    background: #EFF3EE;
+  }
+  .problem-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    color: var(--ink);
+  }
+  .problem-card p { font-size: 0.9rem; color: var(--muted); }
+
+  /* ── HOW IT WORKS ── */
+  .how-bg { background: var(--teal); }
+  .how-bg h2, .how-bg .section-label { color: var(--white); }
+  .how-bg .section-label { color: rgba(187,239,74,0.7); }
+  .how-bg .lead { color: rgba(247,249,244,0.65); }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .step { position: relative; padding-top: 0.5rem; }
+  .step-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(187,239,74,0.18);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .step h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  .step p { font-size: 0.88rem; color: rgba(247,249,244,0.6); }
+
+  /* ── FEATURES ── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .feat-group h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    color: var(--teal-mid);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--grey);
+  }
+  .feat-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .feat-list li {
+    font-size: 0.9rem;
+    color: var(--ink);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .feat-list li::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--lime-dim);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.42em;
+  }
+
+  /* ── INSIGHTS (NEW) ── */
+  .insights-section { background: #EFF3EE; }
+  .flourish-container {
+    max-width: 900px;
+    margin: 2rem 0 0;
+    background: var(--white);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  /* ── DOWNLOAD ── */
+  .download-section {
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .download-section h2 { color: var(--white); max-width: 28ch; }
+  .download-section .lead { color: rgba(247,249,244,0.55); margin-bottom: 1.5rem; }
+  .download-qr {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .download-qr-frame {
+    background: var(--white);
+    padding: 1rem;
+    border: 2px solid var(--lime);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .download-qr-frame svg, .download-qr-frame img { width: 140px; height: 140px; display: block; }
+  .download-qr-frame .qr-label { color: var(--teal); }
+  .download-side-text {
+    color: rgba(247,249,244,0.6);
+    font-size: 0.85rem;
+    max-width: 18ch;
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--teal);
+    padding: 1.5rem 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--lime);
+    font-size: 1rem;
+  }
+  footer p {
+    color: rgba(247,249,244,0.45);
+    font-size: 0.8rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-qr { align-items: flex-start; }
+    .features-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .download-section { flex-direction: column; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Mess<span>Mate</span></div>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#insights">Insights</a></li>
+    <li><a href="#download">Download</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="pill-row">
+      <span class="pill">For Students</span>
+      <span class="pill">For Mess Committees</span>
+    </div>
+    <h1>Stop cooking<br>for <em>empty</em> plates.</h1>
+    <p>MessMate lets hostel students opt out of meals before the cutoff, rate food, and report issues — giving mess committees a live headcount and real feedback, every single day.</p>
+    <a href="#download" class="cta-btn">Get the App</a>
+  </div>
+
+  <!-- QR CODE — HERO -->
+  <div class="hero-qr">
+    <div class="qr-frame">
+      <img src="qr-code.png" alt="QR code to download MessMate">
+      <div class="qr-label">SCAN TO DOWNLOAD</div>
+    </div>
+    <p class="qr-caption">Works on Android &amp; iOS. Free for all hostel students.</p>
+  </div>
+</section>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat">
+    <span class="stat-num">~30%</span>
+    <span class="stat-desc">of meals go uneaten daily in hostels</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">0</span>
+    <span class="stat-desc">data points mess committees currently have</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">2 min</span>
+    <span class="stat-desc">to opt out of a meal before the cutoff</span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="section-label">The Problem</div>
+  <h2>Your mess cooks blind every single day.</h2>
+  <p class="lead">Hostel kitchens prepare the same quantity regardless of how many students actually show up. The result? Predictable waste, frustrated students, and a committee flying without instruments.</p>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <h3>No headcount</h3>
+      <p>Kitchens have no idea how many people will eat until it's too late to adjust quantities.</p>
+    </div>
+    <div class="problem-card">
+      <h3>Scattered complaints</h3>
+      <p>Feedback happens on WhatsApp groups or not at all. The mess committee sees none of it systematically.</p>
+    </div>
+    <div class="problem-card">
+      <h3>No menu visibility</h3>
+      <p>Students find out what's cooking when they arrive. If they don't like it, the food still gets made.</p>
+    </div>
+    <div class="problem-card">
+      <h3>Zero accountability</h3>
+      <p>Without data, it's hard to push for better ingredients or cooking — every complaint becomes subjective.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how-bg">
+  <div class="section-label">How MessMate Works</div>
+  <h2>Three actions. Real impact.</h2>
+  <p class="lead">Students take two minutes. The mess committee gets an entire operations dashboard in return.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>See today's menu</h3>
+      <p>Open the app to see what's being served for breakfast, lunch and dinner — posted by the mess team each morning.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Opt out if skipping</h3>
+      <p>Not eating? Mark yourself out before the cutoff. That signal goes straight to the kitchen's headcount.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Rate and report</h3>
+      <p>After eating, rate the meal and flag any hygiene or quality issue. All reports are timestamped and attributed.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Committee sees everything</h3>
+      <p>Live headcount forecast, aggregated ratings, issue log, and waste saved — all in one committee dashboard.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-label">Features</div>
+  <h2>Built for both sides of the mess counter.</h2>
+  <p class="lead">MessMate has two modes — one for students, one for the committee — that talk to each other in real time.</p>
+  <div class="features-grid">
+    <div class="feat-group">
+      <h3>Student App</h3>
+      <ul class="feat-list">
+        <li>Daily menu view for all three meals</li>
+        <li>One-tap meal opt-out before cutoff time</li>
+        <li>Post-meal star rating (1–5)</li>
+        <li>Issue reporting with photo upload</li>
+        <li>Notification when menu is updated</li>
+        <li>Personal meal history and savings tracker</li>
+      </ul>
+    </div>
+    <div class="feat-group">
+      <h3>Committee Dashboard</h3>
+      <ul class="feat-list">
+        <li>Live headcount forecast per meal</li>
+        <li>Aggregated ratings by dish and date</li>
+        <li>Issue inbox with status tracking</li>
+        <li>Estimated waste saved (kg / cost)</li>
+        <li>Weekly and monthly trend reports</li>
+        <li>Menu publishing and cutoff time control</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS (NEW) -->
+<section id="insights" class="insights-section">
+  <div class="section-label">Data Insights</div>
+  <h2>Connecting ratings to food waste.</h2>
+  <p class="lead">Explore our data analysis to see how meal ratings directly correlate with the amount of food thrown away each day.</p>
+  
+  <!-- FLOURISH EMBED -->
+  <div class="flourish-container">
+    <div class="flourish-embed flourish-story" data-src="story/3856643"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download" class="download-section">
+  <div>
+    <div class="section-label" style="color: rgba(187,239,74,0.6)">Get MessMate</div>
+    <h2>Scan, install, skip the waste.</h2>
+    <p class="lead">Free for all hostel students. No sign-up friction — log in with your college email and you're in.</p>
+    <a href="#download" class="cta-btn">Download Now</a>
+  </div>
+
+  <!-- QR CODE — DOWNLOAD SECTION -->
+  <div class="download-qr">
+    <div class="download-qr-frame">
+      <img src="qr-code.png" alt="QR code to download MessMate">
+      <div class="qr-label">SCAN TO DOWNLOAD</div>
+    </div>
+    <p class="download-side-text">Point your phone camera at the code — no app store search needed.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">MessMate</div>
+  <p>Built to cut hostel food waste, one opt-out at a time.</p>
+</footer>
+
+</body>
+</html>
